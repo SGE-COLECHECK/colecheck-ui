@@ -15,6 +15,10 @@
         .sidebar-item-active svg {
             color: white;
         }
+        .tab-active {
+            border-bottom-color: #5DADE2;
+            color: #5DADE2;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -73,7 +77,7 @@
                         Pensiones Pendientes
                     </button>
                     <div class="flex items-center">
-                        <img class="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?u=kevin" alt="User avatar">
+                         <div class="h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">KP</div>
                         <span class="ml-3 text-sm font-medium text-gray-700">Kevin Piazzoli</span>
                     </div>
                 </div>
@@ -83,37 +87,127 @@
             <main id="main-content" class="flex-1 p-6 overflow-y-auto">
                 <!-- Dashboard View -->
                 <div id="view-dashboard" class="view-content">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <div class="bg-white p-5 rounded-lg shadow flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">Total de alumnos</p>
-                                <p class="text-3xl font-bold text-gray-800">90</p>
-                            </div>
-                            <div class="bg-blue-100 rounded-full p-3"><svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M1 12v7a2 2 0 002 2h18a2 2 0 002-2v-7" /></svg></div>
-                        </div>
-                        <div class="bg-white p-5 rounded-lg shadow flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">Personal</p>
-                                <p class="text-3xl font-bold text-gray-800">27</p>
-                            </div>
-                            <div class="bg-blue-100 rounded-full p-3"><svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div>
-                        </div>
-                        <div class="bg-white p-5 rounded-lg shadow flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">Aulas</p>
-                                <p class="text-3xl font-bold text-gray-800">14</p>
-                            </div>
-                            <div class="bg-blue-100 rounded-full p-3"><svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg></div>
-                        </div>
+                     <!-- Tab Navigation -->
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                            <button data-tab="asistencia" class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Asistencia del Día</button>
+                            <button data-tab="rendimiento" class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Rendimiento y Riesgo</button>
+                            <button data-tab="operacion" class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Operación y Finanzas</button>
+                            <button data-tab="resumen" class="dashboard-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Resumen General</button>
+                        </nav>
                     </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="bg-white p-5 rounded-lg shadow">
-                            <h3 class="font-semibold text-gray-800">Asistencias de Estudiantes</h3>
-                            <canvas id="asistenciaChart"></canvas>
+
+                    <!-- Tab Content -->
+                    <div class="mt-6">
+                        <!-- Pestaña 1: Asistencia del Día -->
+                        <div id="tab-asistencia" class="dashboard-tab-content space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <input type="date" value="2025-09-12" class="border-gray-300 rounded-md shadow-sm">
+                                <select class="border-gray-300 rounded-md shadow-sm">
+                                    <option>Todos los Grados</option>
+                                    <option>1er Grado</option>
+                                    <option>2do Grado</option>
+                                    <option>3er Grado</option>
+                                    <option>4to Grado</option>
+                                    <option>5to Grado</option>
+                                    <option>6to Grado</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">% Asistencia Estudiantil</p><p class="text-3xl font-bold text-gray-800">95.3%</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">% Asistencia Docente</p><p class="text-3xl font-bold text-gray-800">98.1%</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">Total de Alumnos</p><p class="text-3xl font-bold text-gray-800">120</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">Total de Docentes</p><p class="text-3xl font-bold text-gray-800">15</p></div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <div class="lg:col-span-1 bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Descomposición de Asistencia</h3>
+                                    <canvas id="asistenciaDiaChart"></canvas>
+                                </div>
+                                <div class="lg:col-span-2 bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Asistencia por Grado</h3>
+                                    <canvas id="asistenciaGradoChart"></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-white p-5 rounded-lg shadow">
-                            <h3 class="font-semibold text-gray-800">Tardanzas de Estudiantes</h3>
-                            <canvas id="tardanzasChart"></canvas>
+
+                        <!-- Pestaña 2: Rendimiento y Riesgo -->
+                        <div id="tab-rendimiento" class="dashboard-tab-content hidden space-y-6">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Alertas Críticas (IA Predictiva)</h3>
+                                    <div class="space-y-3"><div class="p-3 bg-red-50 border-l-4 border-red-400"><p class="font-bold text-red-800">🚩 [ALTO RIESGO] Ana Pérez (3er Grado)</p><p class="text-sm text-gray-700">Riesgo de deserción del 85% (3 faltas seguidas, notas bajas en Matemática).</p></div><div class="p-3 bg-yellow-50 border-l-4 border-yellow-400"><p class="font-bold text-yellow-800">⚠️ [BAJO RENDIMIENTO] Carlos Li (4to Grado)</p><p class="text-sm text-gray-700">Promedio por debajo del nivel en Comunicación.</p></div></div>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Top 5 Cursos con Rendimiento Más Bajo</h3>
+                                    <canvas id="rendimientoCursosChart"></canvas>
+                                </div>
+                            </div>
+                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <div class="lg:col-span-2 bg-white p-5 rounded-lg shadow">
+                                   <h3 class="font-semibold text-gray-800 mb-4">Alumnos en Peligro</h3>
+                                   <div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th class="px-6 py-3">Alumno</th><th class="px-6 py-3">Grado</th><th class="px-6 py-3">Riesgo</th><th class="px-6 py-3">Acciones</th></tr></thead><tbody>
+                                    <tr class="bg-white border-b"><td class="px-6 py-4 flex items-center gap-3"><div class="h-10 w-10 rounded-full bg-red-500 text-white flex items-center justify-center font-bold">AP</div> Ana Pérez</td><td class="px-6 py-4">3er Grado</td><td class="px-6 py-4"><span class="px-2 py-1 font-semibold text-xs rounded-full bg-red-100 text-red-800">Alto</span></td><td class="px-6 py-4"><button class="text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 px-3 py-1 rounded-md">Ver Detalle</button></td></tr>
+                                    <tr class="bg-white border-b"><td class="px-6 py-4 flex items-center gap-3"><div class="h-10 w-10 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold">CL</div> Carlos Li</td><td class="px-6 py-4">4to Grado</td><td class="px-6 py-4"><span class="px-2 py-1 font-semibold text-xs rounded-full bg-yellow-100 text-yellow-800">Medio</span></td><td class="px-6 py-4"><button class="text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 px-3 py-1 rounded-md">Ver Detalle</button></td></tr>
+                                    <tr class="bg-white border-b"><td class="px-6 py-4 flex items-center gap-3"><div class="h-10 w-10 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold">JS</div> Juan Soto</td><td class="px-6 py-4">3er Grado</td><td class="px-6 py-4"><span class="px-2 py-1 font-semibold text-xs rounded-full bg-yellow-100 text-yellow-800">Medio</span></td><td class="px-6 py-4"><button class="text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 px-3 py-1 rounded-md">Ver Detalle</button></td></tr>
+                                    <tr class="bg-white border-b"><td class="px-6 py-4 flex items-center gap-3"><div class="h-10 w-10 rounded-full bg-red-500 text-white flex items-center justify-center font-bold">MV</div> María Vega</td><td class="px-6 py-4">5to Grado</td><td class="px-6 py-4"><span class="px-2 py-1 font-semibold text-xs rounded-full bg-red-100 text-red-800">Alto</span></td><td class="px-6 py-4"><button class="text-sm font-medium text-white bg-sky-500 hover:bg-sky-600 px-3 py-1 rounded-md">Ver Detalle</button></td></tr>
+                                    </tbody></table></div>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Alumnos en Riesgo por Grado</h3>
+                                    <canvas id="riesgoPorGradoChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="bg-white p-5 rounded-lg shadow">
+                                <h3 class="font-semibold text-gray-800 mb-4">Mapa de Calor: Estado General por Grado</h3>
+                                <div class="grid grid-cols-3 md:grid-cols-6 gap-4 text-center">
+                                    <div class="p-4 rounded-lg bg-green-400 text-white font-bold">1er Grado</div>
+                                    <div class="p-4 rounded-lg bg-green-400 text-white font-bold">2do Grado</div>
+                                    <div class="p-4 rounded-lg bg-red-500 text-white font-bold">3er Grado</div>
+                                    <div class="p-4 rounded-lg bg-yellow-400 text-white font-bold">4to Grado</div>
+                                    <div class="p-4 rounded-lg bg-red-500 text-white font-bold">5to Grado</div>
+                                    <div class="p-4 rounded-lg bg-green-400 text-white font-bold">6to Grado</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pestaña 3: Operación y Finanzas -->
+                        <div id="tab-operacion" class="dashboard-tab-content hidden space-y-6">
+                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">Ingresos del Mes</p><p class="text-3xl font-bold text-gray-800">S/ 50,250</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">Monto por Cobrar</p><p class="text-3xl font-bold text-gray-800">S/ 12,800</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow"><p class="text-sm font-medium text-gray-500">% de Cobranza Efectiva</p><p class="text-3xl font-bold text-gray-800">79.5%</p></div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Evolución de Recaudación (Últimos 6 Meses)</h3>
+                                    <canvas id="recaudacionChart"></canvas>
+                                </div>
+                                <div class="bg-white p-5 rounded-lg shadow">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Top 5 Apoderados con Mayor Deuda</h3>
+                                    <table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th class="px-4 py-2">Apoderado</th><th class="px-4 py-2">Monto Deudor</th></tr></thead><tbody><tr class="border-b"><td class="px-4 py-2">Juan Rodriguez</td><td class="px-4 py-2">S/ 1,200.00</td></tr><tr class="border-b"><td class="px-4 py-2">Maria Sanchez</td><td class="px-4 py-2">S/ 950.00</td></tr></tbody></table>
+                                </div>
+                            </div>
+                            <div class="bg-white p-5 rounded-lg shadow">
+                                <h3 class="font-semibold text-gray-800 mb-4">Horas Lectivas por Docente</h3>
+                                <canvas id="cargaLectivaChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña 4: Resumen General -->
+                        <div id="tab-resumen" class="dashboard-tab-content hidden space-y-6">
+                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="bg-white p-5 rounded-lg shadow text-center"><p class="text-sm font-medium text-gray-500">Tasa de Ocupación</p><p class="text-4xl font-bold text-gray-800">92%</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow text-center"><p class="text-sm font-medium text-gray-500">Índice de Deserción</p><p class="text-4xl font-bold text-red-600">1.5%</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow text-center"><p class="text-sm font-medium text-gray-500">% Asistencia General</p><p class="text-4xl font-bold text-gray-800">94.8%</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow text-center"><p class="text-sm font-medium text-gray-500">Rentabilidad del Mes</p><p class="text-4xl font-bold text-green-600">+8%</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow text-center"><p class="text-sm font-medium text-gray-500">Promedio General Notas</p><p class="text-4xl font-bold text-gray-800">15.8</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow text-center"><p class="text-sm font-medium text-gray-500">Total de Morosidad</p><p class="text-4xl font-bold text-yellow-600">S/ 12,800</p></div>
+                                <div class="bg-white p-5 rounded-lg shadow col-span-2 lg:col-span-3">
+                                    <h3 class="font-semibold text-gray-800 mb-4">Actividad de Padres en el Portal (Últimos 30 días)</h3>
+                                    <canvas id="parentalActivityChart"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +224,7 @@
                         </div>
                         <div class="mt-4 border-t pt-4 flex items-center space-x-4">
                             <select class="border-gray-300 rounded-md"><option>2025</option></select>
-                            <select class="border-gray-300 rounded-md"><option>Primaria 3°A</option></select>
+                            <select class="border-gray-300 rounded-md"><option>3er Grado</option></select>
                             <select class="border-gray-300 rounded-md"><option>Urtecho Perez, Alex</option></select>
                         </div>
                     </div>
@@ -428,92 +522,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Navigation Logic ---
-            const viewLinks = document.querySelectorAll('[data-view]');
-            const mainContent = document.getElementById('main-content');
-            const viewTitle = document.getElementById('view-title');
-            const views = document.querySelectorAll('.view-content');
-
-            const viewTitles = {
-                dashboard: 'Panel Principal',
-                pagos: 'Pagos',
-                asistencia: 'Asistencia de Estudiantes',
-                notas: 'Notas de Estudiantes',
-                comportamiento: 'Comportamiento de Estudiantes',
-                comunicados: 'Comunicados',
-                estudiantes: 'Gestión de Estudiantes',
-                docentes: 'Gestión de Docentes',
-                personal: 'Gestión de Personal',
-                padres: 'Gestión de Padres',
-            };
-
-            function switchView(viewId) {
-                views.forEach(view => {
-                    if (view.id === `view-${viewId}`) {
-                        view.classList.remove('hidden');
-                    } else {
-                        view.classList.add('hidden');
-                    }
-                });
-                viewTitle.textContent = viewTitles[viewId] || 'ColeCheck';
-
-                 // Update active sidebar item
-                viewLinks.forEach(link => {
-                    if (link.dataset.view === viewId) {
-                        link.classList.add('sidebar-item-active');
-                    } else {
-                        link.classList.remove('sidebar-item-active');
-                    }
-                });
-            }
-
-            viewLinks.forEach(link => {
-                link.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const viewId = link.dataset.view;
-                    switchView(viewId);
-                });
-            });
-
-            // Set initial view
-            switchView('dashboard');
-
-            // --- Chart.js Logic ---
-            const createChart = (ctx, type, labels, data, label) => {
-                new Chart(ctx, {
-                    type: type,
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: label,
-                            data: data,
-                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                            borderColor: 'rgba(59, 130, 246, 1)',
-                            borderWidth: 1,
-                            borderRadius: 5,
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: { beginAtZero: true }
-                        },
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            };
-
-            const asistenciaCtx = document.getElementById('asistenciaChart');
-            if(asistenciaCtx) {
-                createChart(asistenciaCtx, 'bar', ['04/09'], [10], 'Asistencias');
-            }
-
-            const tardanzasCtx = document.getElementById('tardanzasChart');
-            if(tardanzasCtx) {
-                createChart(tardanzasCtx, 'bar', ['27/08', '04/09', '08/09'], [17, 17, 2], 'Tardanzas');
-            }
-        });
-    </script>
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>
